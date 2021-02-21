@@ -3,9 +3,8 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import Input from "@material-ui/core/Input";
 import Slider from "@material-ui/core/Slider";
-import InputAdornment from "@material-ui/core/InputAdornment";
+import Typography from "@material-ui/core/Typography";
 
 const validationSchema = yup.object({
   expMinVol: yup
@@ -49,23 +48,50 @@ const OtwoForm = ({ callback, clear }) => {
     },
   ];
 
+  const marks2 = [
+    {
+      value: 0,
+      label: "0",
+    },
+    {
+      value: 5,
+      label: "5",
+    },
+    {
+      value: 10,
+      label: "10",
+    },
+    {
+      value: 30,
+      label: "30",
+    },
+  ];
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={12}>
-          <Input
-            fullWidth
-            id="expMinVol"
-            name="expMinVol"
-            label="ExpMinVol"
-            type="number"
-            value={formik.values.expMinVol}
-            onChange={formik.handleChange}
-            error={formik.touched.expMinVol && Boolean(formik.errors.expMinVol)}
-            endAdornment={<InputAdornment position="end">Liter</InputAdornment>}
+          <Typography id="continuous-slider" gutterBottom>
+            ExpMinVol
+          </Typography>
+          <Slider
+            defaultValue={21}
+            getAriaValueText={(value) => {
+              return `${value} liter`;
+            }}
+            aria-labelledby="discrete-slider-always"
+            onChange={(e, value) => formik.setFieldValue("expMinVol", value)}
+            step={0.1}
+            min={0}
+            max={30}
+            marks={marks2}
+            valueLabelDisplay="auto"
           />
         </Grid>
         <Grid item xs={12} md={12}>
+          <Typography id="continuous-slider" gutterBottom>
+            FiO2
+          </Typography>
           <Slider
             defaultValue={21}
             getAriaValueText={(value) => {
@@ -78,19 +104,7 @@ const OtwoForm = ({ callback, clear }) => {
             valueLabelDisplay="auto"
           />
         </Grid>
-        <Grid item xs={6} md={6}>
-          <Button
-            variant="outlined"
-            fullWidth
-            onClick={() => {
-              clear();
-              formik.resetForm();
-            }}
-          >
-            Rensa
-          </Button>
-        </Grid>
-        <Grid item xs={6} md={6}>
+        <Grid item xs={12} md={12}>
           <Button color="primary" variant="contained" fullWidth type="submit">
             Beräkna
           </Button>

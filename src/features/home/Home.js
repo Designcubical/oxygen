@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import LocalHospital from "@material-ui/icons/LocalHospital";
 import Paper from "@material-ui/core/Paper";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
@@ -17,11 +23,21 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(10, 0, 6),
   },
+  formstart: {
+    padding: theme.spacing(2, 0, 1),
+  },
 }));
 
 const Home = () => {
   const classes = useStyles();
   const [result, setResult] = useState(0);
+
+  const timeConvert = (n) => {
+    const minutes = n % 60;
+    const hours = (n - minutes) / 60;
+
+    return `${hours}h ${minutes}min`;
+  };
 
   const calculate = ({ expMinVol, fiO2 }) => {
     // 5kg 200bar = 1000l
@@ -58,7 +74,51 @@ const Home = () => {
                 {result} l/min
               </Typography>
             </Paper>
-            <Typography variant="h6" gutterBottom>
+            <TableContainer component={Paper}>
+              <Table
+                className={classes.table}
+                size="small"
+                aria-label="a dense table"
+              >
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Flaska (200bar)</TableCell>
+                    <TableCell align="right">beräknad tid</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow key={1}>
+                    <TableCell component="th" scope="row">
+                      3kg
+                    </TableCell>
+                    <TableCell align="right">
+                      {result > 0 ? timeConvert((600 / result).toFixed(0)) : ""}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow key={2}>
+                    <TableCell component="th" scope="row">
+                      5kg
+                    </TableCell>
+                    <TableCell align="right">
+                      {result > 0
+                        ? timeConvert((1000 / result).toFixed(0))
+                        : ""}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow key={3}>
+                    <TableCell component="th" scope="row">
+                      10kg
+                    </TableCell>
+                    <TableCell align="right">
+                      {result > 0
+                        ? timeConvert((2000 / result).toFixed(0))
+                        : ""}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <Typography variant="h6" gutterBottom className={classes.formstart}>
               Ange värden
             </Typography>
             <OtwoForm
