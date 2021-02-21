@@ -75,7 +75,7 @@ const OtwoForm = ({ callback, clear }) => {
             ExpMinVol
           </Typography>
           <Slider
-            defaultValue={21}
+            defaultValue={7.7}
             getAriaValueText={(value) => {
               return `${value} liter`;
             }}
