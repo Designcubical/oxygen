@@ -10,7 +10,6 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 const validationSchema = yup.object({
   expMinVol: yup
     .number("Ange expMinVol")
-    .min(0)
     .required("ExpMinVol är obligatoriskt"),
   fiO2: yup.number("Ange fiO2").required("FiO2 är obligatoriskt"),
 });
