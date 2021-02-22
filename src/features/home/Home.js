@@ -40,10 +40,10 @@ const Home = () => {
   };
 
   const calculate = ({ expMinVol, fiO2 }) => {
-    // 5kg 200bar = 1000l
+    // 5kg 200bar = 1000l <<< 8.3 58 = 5.3    9.7  9.48 = 8.97
     // O2 Consumption = (ExpMinVol + 3l/min) * (FiO2 - 20.9) / 79.1
-    const vol = parseInt(expMinVol) + 3;
-    const fi = parseInt(fiO2) - 20.9;
+    const vol = expMinVol + 3;
+    const fi = fiO2 - 20.9;
 
     return ((vol * fi) / 79.1).toFixed(2);
   };
@@ -89,15 +89,15 @@ const Home = () => {
                 <TableBody>
                   <TableRow key={1}>
                     <TableCell component="th" scope="row">
-                      3kg
+                      2.5L
                     </TableCell>
                     <TableCell align="right">
-                      {result > 0 ? timeConvert((600 / result).toFixed(0)) : ""}
+                      {result > 0 ? timeConvert((500 / result).toFixed(0)) : ""}
                     </TableCell>
                   </TableRow>
                   <TableRow key={2}>
                     <TableCell component="th" scope="row">
-                      5kg
+                      5L
                     </TableCell>
                     <TableCell align="right">
                       {result > 0
@@ -107,7 +107,7 @@ const Home = () => {
                   </TableRow>
                   <TableRow key={3}>
                     <TableCell component="th" scope="row">
-                      10kg
+                      10L
                     </TableCell>
                     <TableCell align="right">
                       {result > 0
