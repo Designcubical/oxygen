@@ -5,6 +5,8 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
+import { Avatar } from "@material-ui/core";
+import buttonAvatar from "../assets/2.png";
 
 const validationSchema = yup.object({
   expMinVol: yup
@@ -105,7 +107,14 @@ const OtwoForm = ({ callback, clear }) => {
           />
         </Grid>
         <Grid item xs={12} md={12}>
-          <Button color="primary" variant="contained" fullWidth type="submit">
+          <Button
+            variant="contained"
+            color="secondary"
+            fullWidth
+            size="large"
+            type="submit"
+            startIcon={<Avatar src={buttonAvatar} />}
+          >
             Beräkna
           </Button>
         </Grid>

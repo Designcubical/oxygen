@@ -89,10 +89,10 @@ const Home = () => {
                 <TableBody>
                   <TableRow key={1}>
                     <TableCell component="th" scope="row">
-                      2.5L
+                      3L
                     </TableCell>
                     <TableCell align="right">
-                      {result > 0 ? timeConvert((500 / result).toFixed(0)) : ""}
+                      {result > 0 ? timeConvert((600 / result).toFixed(0)) : ""}
                     </TableCell>
                   </TableRow>
                   <TableRow key={2}>
